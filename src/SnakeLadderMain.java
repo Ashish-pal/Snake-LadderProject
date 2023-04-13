@@ -47,18 +47,19 @@ public class SnakeLadderMain {
     }
 
     public static void main(String[] args) {
-        boolean isGameOver = false;
         int diceRollCount = 0;
         int playerPosition = 0;
 
         System.out.println("Welcome to the game of Snakes and Ladders!");
 
-        while (!isGameOver) {
+        while (playerPosition != BOARD_SIZE) {
             int diceValue = rollDice();
             diceRollCount++;
             System.out.println("You rolled a " + diceValue);
+
             int option = getOption();
             System.out.print("You got ");
+
             switch (option) {
                 case 0:
                     System.out.println("No Play.");
@@ -70,17 +71,16 @@ public class SnakeLadderMain {
                     System.out.println("a Snake.");
                     break;
             }
+
             playerPosition = getOptionResult(option, playerPosition, diceValue);
+
             if (playerPosition < 0) {
                 playerPosition = 0;
             }
+
             System.out.println("You are now at position " + playerPosition);
-            if (playerPosition == BOARD_SIZE) {
-                isGameOver = true;
-                System.out.println("Congratulations, you won!");
-            } else if (playerPosition > BOARD_SIZE) {
-                playerPosition -= diceValue;
-            }
         }
+
+        System.out.println("Congratulations, you won in " + diceRollCount + " rolls of the dice.");
     }
 }
