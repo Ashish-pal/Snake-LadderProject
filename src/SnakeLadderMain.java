@@ -9,6 +9,7 @@ public class SnakeLadderMain {
         Random random = new Random();
         return random.nextInt(6) + 1;
     }
+
     static int getNextPosition(int currentPosition, int diceValue) {
         int nextPosition = currentPosition + diceValue;
         if (nextPosition > BOARD_SIZE) {
@@ -26,10 +27,12 @@ public class SnakeLadderMain {
         }
         return nextPosition;
     }
+
     static int getOption() {
         Random random = new Random();
         return random.nextInt(3);
     }
+
     static int getOptionResult(int option, int currentPosition, int diceValue) {
         switch (option) {
             case 0:
@@ -42,18 +45,20 @@ public class SnakeLadderMain {
                 return currentPosition;
         }
     }
+
     public static void main(String[] args) {
         boolean isGameOver = false;
         int diceRollCount = 0;
         int playerPosition = 0;
+
         System.out.println("Welcome to the game of Snakes and Ladders!");
+
         while (!isGameOver) {
             int diceValue = rollDice();
             diceRollCount++;
             System.out.println("You rolled a " + diceValue);
             int option = getOption();
             System.out.print("You got ");
-
             switch (option) {
                 case 0:
                     System.out.println("No Play.");
@@ -73,6 +78,8 @@ public class SnakeLadderMain {
             if (playerPosition == BOARD_SIZE) {
                 isGameOver = true;
                 System.out.println("Congratulations, you won!");
+            } else if (playerPosition > BOARD_SIZE) {
+                playerPosition -= diceValue;
             }
         }
     }
